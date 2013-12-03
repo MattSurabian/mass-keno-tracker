@@ -86,7 +86,7 @@ function(
             if(userInput > this.model.get('maxDraws')){
                 userInput = this.model.get('maxDraws');
             }
-            this.model.set('numberOfGames',userInput);
+            this.model.set({'numberOfGames':userInput},{silent:true});
             this.trigger('update-num-draws');
         },
 
