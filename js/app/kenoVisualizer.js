@@ -98,11 +98,14 @@ function(
 
                 if(_this.draws.previousLength < _this.draws.length){
                     // there's new data!
+                    _this.settingsView.model.set({
+                        maxDraws: _this.draws.length,
+                        lastDrawId: _this.draws.last(1)[0].get('draw_id')
+                    });
                     _this.settingsView.handleIncrementalMode();
+                    _this.updateKenoBoard();
                 }
-                _this.settingsView.model.set('maxDraws', _this.draws.length);
-                _this.settingsView.model.set('lastDrawId',_this.draws.last(1)[0].get('draw_id'));
-                _this.updateKenoBoard();
+
                 $('.spinner').hide();
 
             });
