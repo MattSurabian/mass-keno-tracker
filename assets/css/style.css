@@ -1,0 +1,98 @@
+body{
+    font-family: arial;
+    text-align: center;
+}
+.playfield{
+    width:540px;
+    height:432px;
+    margin:0 auto;
+    border:2px solid;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+.keno-board{
+    overflow: hidden;
+    position: relative;
+}
+num{
+    float:left;
+    width:40px;
+    height:40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 3px;
+    border:5px solid;
+    margin:2px;
+    color: #fff;
+    cursor: pointer;
+    background:#000000;
+}
+
+.layerup{
+    opacity:.1;
+    background:#000;
+    width:40px;
+    height:40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.saveBet{
+    display: none;
+    width:200px;
+    margin:0 auto;
+}
+.saveBetButtonContainer{
+    width:200px;
+    margin:0 auto;
+    text-align: center;
+}
+.number.hot{
+    border-color: red;
+}
+.number.cold{
+    border-color: blue;
+}
+.number.fav{
+    border-color:green;
+}
+.favorite{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.spinner{
+    position: absolute;
+    width:540px;
+    height:432px;
+    background:#FFFFFF;
+    opacity:.8;
+    top:0;
+    left:0;
+    text-align:center;
+    line-height: 432px;
+    margin:auto;
+    z-index: 2;
+}
+
+.payout{
+    display:inline;
+}
+.savedBets{
+    width:440px;
+    margin:0 auto;
+    border:1px solid;
+    border-radius: 3px;
+    margin-top:20px;
+    text-align: center;
+    padding:10px;
+}
+.bet{
+    cursor:pointer;
+}
+.bet:hover{
+    color:#8b0000;
+}

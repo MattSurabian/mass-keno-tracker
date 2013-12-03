@@ -1,0 +1,4 @@
+server/vendor
+server/composer.phar
+server/composer.lock
+node_modules
