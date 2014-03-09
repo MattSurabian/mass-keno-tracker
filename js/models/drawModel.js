@@ -23,7 +23,7 @@ define([
                 return (this.get('winning_num').indexOf(n) !== -1);
             },
 
-            parseDraw: function(){
+            getDrawArr: function(){
                 return this.get('winning_num').split('-');
             }
 

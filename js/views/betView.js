@@ -32,7 +32,7 @@ function(
 
         render: function(){
             this.setElement(Mustache.render(template,{
-                draw: this.model.getDraw()
+                draw: this.model.parseDraw()
             }));
 
             return this.$el;
@@ -50,7 +50,7 @@ function(
          * is up to date.
          */
         removeBet: function(){
-            var draw = this.model.getDraw();
+            var draw = this.model.parseDraw();
             this.model.destroy();
             this.$el.remove();
             this.trigger('cancel-bet',draw);

@@ -2,6 +2,15 @@ body{
     font-family: arial;
     text-align: center;
 }
+.social{
+    width:200px;
+    float:right;
+    text-align:right;
+}
+.linkText{
+    font-size: 11px;
+    color:#000000;
+}
 .playfield{
     width:540px;
     height:432px;

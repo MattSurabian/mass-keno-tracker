@@ -17,7 +17,7 @@ function(
     return Backbone.Model.extend({
 
         defaults: {
-            bet_draw: null,
+            bet_draw_arr:[],
             bet_bet: 1,
             bet_wins: 0,
             bet_total_payout: "$0",
@@ -25,11 +25,13 @@ function(
         },
 
         drawContains: function(num){
-            return (this.get('bet_draw').indexOf(num) !== -1);
+            var drawArr = this.get('bet_draw_arr');
+            return (drawArr.indexOf(num) !== -1);
         },
 
         parseDraw: function(){
-            return this.get('bet_draw').split('-');
+            var drawArr = this.get('bet_draw_arr');
+            return drawArr.join('-');
         },
 
         getTotalPayout: function(){
@@ -52,24 +54,33 @@ function(
             return this.get('bet_spots');
         },
 
-        incrSpots: function(){
-            this.set('bet_spots',this.get('bet_spots')+1);
-        },
-
-        decrSpots: function(){
-            this.set('bet_spots',this.get('bet_spots')-1);
-        },
-
         getBet: function(){
             return this.get('bet_bet');
         },
 
-        getDraw: function(){
-            return this.get('bet_draw');
+        getDrawArr: function(){
+            return this.get('bet_draw_arr');
         },
 
-        setDraw: function(draw){
-            this.set('bet_draw',draw);
+        addToDraw: function(num){
+            var drawArr = this.get('bet_draw_arr');
+            if(drawArr.indexOf(num) === -1){
+                drawArr.push(num);
+                this.set('bet_draw_arr', drawArr);
+                this.set('bet_spots',drawArr.length);
+            }
+            return drawArr;
+        },
+
+        removeFromDraw: function(num){
+            var drawArr = this.get('bet_draw_arr');
+            var numIndex = drawArr.indexOf(num);
+            if(numIndex !== -1){
+                drawArr.splice(numIndex,1);
+                this.set('bet_draw_arr', drawArr);
+                this.set('bet_spots',drawArr.length);
+            }
+            return drawArr;
         }
 
     });

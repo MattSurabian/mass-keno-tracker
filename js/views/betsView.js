@@ -35,7 +35,6 @@ define([
             initialize:function(){
                 this.collection = new BetCollection();
 
-                this.addToOpenBet = _.bind(this.addToOpenBet,this);
                 this.betCanceled = _.bind(this.betCanceled,this);
 
                 $('.saveBet').on('click', _.bind(function(){
@@ -61,14 +60,14 @@ define([
                 }
 
                 if(!_.isNull(this.openBet) && this.isNumInSavedBets(val)){
-                    if(this.openBet.getDraw().indexOf(val) === -1){
+                    if(this.openBet.getDrawArr().indexOf(val) === -1){
                         numberModel.set('favorite',true);
                         this.addToOpenBet(val);
                     }else{
                         this.removeFromOpenBet(val);
                     }
                 }else{
-                    if(this.openBet.getDraw().indexOf(val) === -1){
+                    if(this.openBet.getDrawArr().indexOf(val) === -1){
                         numberModel.set('favorite',true);
                         this.addToOpenBet(val);
                     }else{
@@ -90,15 +89,12 @@ define([
                 if(_.isNull(this.openBet)){
                     this.openBet = new BetModel({
                         bet_draw: String(num),
-                        bet_spots: 1
+                        bet_spots: 1,
+                        bet_draw_arr: [num]
                     });
                     $('.saveBet').show();
                 }else{
-                    var curBet = this.openBet.getDraw();
-                    if(curBet.indexOf(num) === -1){
-                        this.openBet.setDraw(curBet+'-'+num);
-                        this.openBet.incrSpots();
-                    }
+                    this.openBet.addToDraw(num);
                 }
             },
 
@@ -110,25 +106,11 @@ define([
              * @param num
              */
             removeFromOpenBet:function(num){
-                var curBet = this.openBet.getDraw();
+                var curBet = this.openBet.removeFromDraw(num);
 
-                //UGH this'll teach me to work with strings :-(
-                var regExMatch = new RegExp('-'+num+'-');
-                var regExMatch1 = new RegExp('-'+num);
-                var regExMatch2 = new RegExp(num+'-');
-                var regExMatch3 = new RegExp(num,'');
-
-                curBet=curBet.replace(regExMatch,'-');
-                curBet=curBet.replace(regExMatch1,'');
-                curBet=curBet.replace(regExMatch2,'');
-                curBet=curBet.replace(regExMatch3,'');
-
-                if(curBet === ''){
+                if(curBet.length === 0){
                     this.openBet = null;
                     $('.saveBet').hide();
-                }else{
-                    this.openBet.setDraw(curBet);
-                    this.openBet.decrSpots();
                 }
             },
 

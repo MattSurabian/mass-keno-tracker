@@ -24,6 +24,12 @@ function(
             hot: false,
             cold: false,
             favorite: false
+        },
+
+        setFavorite: function(val){
+            if(_.isBoolean(val)){
+                this.set('favorite',val);
+            }
         }
     });
 

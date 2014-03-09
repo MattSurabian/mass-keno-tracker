@@ -49,15 +49,15 @@ function(
          */
         showFrequency:function(draws){
             this.draws = draws.length;
-            var frequencyMatrix = [];
+            var frequencyObject = [];
             _.each(draws,function(draw){
-                var thisDraw =_.countBy(draw.parseDraw(),function(num){
+                var thisDraw =_.countBy(draw.getDrawArr(),function(num){
                     return num;
                 });
-                frequencyMatrix = Utils.mergeObjects(frequencyMatrix,thisDraw);
+                frequencyObject = Utils.mergeObjects(frequencyObject,thisDraw);
             });
 
-            this.collection.update(frequencyMatrix);
+            this.collection.update(frequencyObject);
         },
 
         /**
@@ -90,8 +90,8 @@ function(
         showHotCold:function(){
             this.collection.resetHotCold();
             if(this.draws > 2){
-                this.collection.setHot();
-                this.collection.setCold();
+                this.collection.setAllHot();
+                this.collection.setAllCold();
             }
         },
 

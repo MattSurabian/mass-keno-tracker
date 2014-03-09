@@ -47,13 +47,13 @@ function(
             this.add(keno_numbers);
         },
 
-        update: function(frequencyMatrix){
+        update: function(frequencyObject){
 
             this.reset();
-            var maxDraw = _.max(frequencyMatrix);
+            var maxDraw = _.max(frequencyObject);
 
             this.each(function(numModel){
-                var draws = frequencyMatrix[numModel.id];
+                var draws = frequencyObject[numModel.id];
                 numModel.set('draws',(_.isUndefined(draws))?0:draws);
                 numModel.set('opacity',draws/maxDraw);
             });
@@ -85,7 +85,7 @@ function(
             });
         },
 
-        setCold:function(){
+        setAllCold:function(){
             var coldCount = 0;
             var _this = this;
             _.each(this.models,function(numModel){
@@ -96,7 +96,7 @@ function(
             });
         },
 
-        setHot:function(){
+        setAllHot:function(){
             _.each(this.last(this.hotSpots),function(numModel){
                 numModel.set({hot:true,cold:false});
             });

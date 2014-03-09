@@ -61,7 +61,7 @@ function(
                 bet.setWins(0);
                 bet.setTotalPayout(0);
 
-                var spots = bet.parseDraw();
+                var spots = bet.getDrawArr();
 
                 _.each(draws,function(drawModel){
 
