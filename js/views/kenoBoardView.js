@@ -42,7 +42,7 @@ function(
          *
          * This helper is called from the main visualizer where the current draws are fetched.
          * The days draws need to be parsed to determine each numbers frequency. This data is
-         * stored in the frequency matrix and passed to the collection where its data is set
+         * stored in the frequency object and passed to the collection where its data is set
          * on the collection's number models.
          *
          * @param draws
