@@ -20,7 +20,6 @@ function(
         defaults: {
             value: 0,
             draws: 0,
-            lastDraw: 0,
             hot: false,
             cold: false,
             favorite: false
