@@ -54,24 +54,24 @@ define([
                 var val = String(numberModel.get('value'));
 
                 if(_.isNull(this.openBet)){
-                    numberModel.set('favorite',true);
+                    numberModel.setFavorite(true);
                     this.addToOpenBet(val);
                     return;
                 }
 
                 if(!_.isNull(this.openBet) && this.isNumInSavedBets(val)){
                     if(this.openBet.getDrawArr().indexOf(val) === -1){
-                        numberModel.set('favorite',true);
+                        numberModel.setFavorite(true);
                         this.addToOpenBet(val);
                     }else{
                         this.removeFromOpenBet(val);
                     }
                 }else{
                     if(this.openBet.getDrawArr().indexOf(val) === -1){
-                        numberModel.set('favorite',true);
+                        numberModel.setFavorite(true);
                         this.addToOpenBet(val);
                     }else{
-                        numberModel.set('favorite',false);
+                        numberModel.setFavorite(false);
                         this.removeFromOpenBet(val);
                     }
                 }
