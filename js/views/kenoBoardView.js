@@ -103,6 +103,18 @@ function(
          */
         hideHotCold:function(){
             this.collection.resetHotCold();
+        },
+
+        /**
+         * setSpotFavorite
+         *
+         * Pass through method to set a number's "favorite" property
+         *
+         * @param spot
+         * @param val
+         */
+        setSpotFavorite:function(spot,val){
+            this.collection.get(spot).setFavorite(val);
         }
 
     });

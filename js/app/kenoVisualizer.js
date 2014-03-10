@@ -62,11 +62,11 @@ function(
             });
 
             this.betsView.on('spot-favorite-off', function(spot){
-                _this.kenoBoard.collection.get(spot).setFavorite(false);
+                _this.kenoBoard.setSpotFavorite(spot,false);
             });
 
             this.betsView.on('spot-favorite-on', function(spot){
-                _this.kenoBoard.collection.get(spot).setFavorite(true);
+                _this.kenoBoard.setSpotFavorite(spot,true);
             });
 
             /**
