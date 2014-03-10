@@ -72,8 +72,8 @@ function(
             this.collection.each(function(num){
                 var numView = new NumberView({model: num});
 
-                numView.on('number-clicked', function(model){
-                    _this.trigger('number-clicked',model);
+                numView.on('number-clicked', function(spot){
+                    _this.trigger('number-clicked',spot);
                 });
 
                 _this.$el.append(numView.render());
