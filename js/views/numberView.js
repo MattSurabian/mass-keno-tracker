@@ -56,7 +56,7 @@ function(
         },
 
         handleClick: function(e){
-            this.trigger('number-clicked',this.model);
+            this.trigger('number-clicked',this.model.get('value'));
         }
     });
 });

@@ -48,31 +48,30 @@ define([
              * The visualizer passes off clicks detected on the board to this method
              * which attempts to determine the user intention and take action.
              *
-             * @param numberModel
+             * @param spot
              */
-            handleNumberClick:function(numberModel){
-                var val = String(numberModel.get('value'));
+            handleNumberClick:function(spot){
 
                 if(_.isNull(this.openBet)){
-                    numberModel.setFavorite(true);
-                    this.addToOpenBet(val);
+                    this.trigger('spot-favorite-on',spot);
+                    this.addToOpenBet(spot);
                     return;
                 }
 
-                if(!_.isNull(this.openBet) && this.isNumInSavedBets(val)){
-                    if(this.openBet.getDrawArr().indexOf(val) === -1){
-                        numberModel.setFavorite(true);
-                        this.addToOpenBet(val);
+                if(!_.isNull(this.openBet) && this.isNumInSavedBets(spot)){
+                    if(this.openBet.getDrawArr().indexOf(spot) === -1){
+                        this.trigger('spot-favorite-on',spot);
+                        this.addToOpenBet(spot);
                     }else{
-                        this.removeFromOpenBet(val);
+                        this.removeFromOpenBet(spot);
                     }
                 }else{
-                    if(this.openBet.getDrawArr().indexOf(val) === -1){
-                        numberModel.setFavorite(true);
-                        this.addToOpenBet(val);
+                    if(this.openBet.getDrawArr().indexOf(spot) === -1){
+                        this.trigger('spot-favorite-on',spot);
+                        this.addToOpenBet(spot);
                     }else{
-                        numberModel.setFavorite(false);
-                        this.removeFromOpenBet(val);
+                        this.trigger('spot-favorite-off',spot);
+                        this.removeFromOpenBet(spot);
                     }
                 }
 

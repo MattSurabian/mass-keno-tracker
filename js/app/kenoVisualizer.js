@@ -87,8 +87,8 @@ function(
             /**
              * kenoBoard event bindings
              */
-            this.kenoBoard.on('number-clicked', function(model){
-                _this.betsView.handleNumberClick(model);
+            this.kenoBoard.on('number-clicked', function(spot){
+                _this.betsView.handleNumberClick(spot);
             });
 
             $('.spinner').show();
