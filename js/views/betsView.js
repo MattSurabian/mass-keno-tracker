@@ -51,31 +51,15 @@ define([
              * @param spot
              */
             handleNumberClick:function(spot){
-
-                if(_.isNull(this.openBet)){
-                    this.trigger('spot-favorite-on',spot);
-                    this.addToOpenBet(spot);
-                    return;
-                }
-
-                if(!_.isNull(this.openBet) && this.isNumInSavedBets(spot)){
-                    if(this.openBet.getDrawArr().indexOf(spot) === -1){
-                        this.trigger('spot-favorite-on',spot);
-                        this.addToOpenBet(spot);
-                    }else{
-                        this.removeFromOpenBet(spot);
+                if(!_.isNull(this.openBet) && this.openBet.drawContains(spot)){
+                    this.removeFromOpenBet(spot);
+                    if(!this.isNumInSavedBets(spot)){
+                        this.trigger('spot-favorite-off',spot);
                     }
                 }else{
-                    if(this.openBet.getDrawArr().indexOf(spot) === -1){
-                        this.trigger('spot-favorite-on',spot);
-                        this.addToOpenBet(spot);
-                    }else{
-                        this.trigger('spot-favorite-off',spot);
-                        this.removeFromOpenBet(spot);
-                    }
+                    this.trigger('spot-favorite-on',spot);
+                    this.addToOpenBet(spot);
                 }
-
-
             },
 
             /**
