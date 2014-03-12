@@ -36,23 +36,22 @@ function(
         },
 
         refresh: function(){
-           this.$el.css('opacity',this.model.get('opacity'));
-           this.$el.attr('title',this.model.get('draws'));
-           if(this.model.get('hot')){
-               this.$el.addClass('hot');
-           }else{
-               this.$el.removeClass('hot');
-           }
-           if(this.model.get('cold')){
-                this.$el.addClass('cold');
-            }else{
-               this.$el.removeClass('cold');
-           }
-           if(this.model.get('favorite')){
-               this.$el.addClass('fav');
-           }else{
-               this.$el.removeClass('fav');
-           }
+            for(var attr in this.model.attributes){
+                var val = this.model.get(attr);
+                switch (attr){
+                    case 'opacity':
+                        this.$el.css(attr,val);
+                        break;
+                    case 'draws':
+                        this.$el.attr('title',val);
+                        break;
+                    case 'hot':
+                    case 'cold':
+                    case 'favorite':
+                        this.$el.toggleClass(attr,val);
+                        break;
+                }
+            }
         },
 
         handleClick: function(e){

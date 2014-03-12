@@ -65,9 +65,11 @@ num{
 .number.cold{
     border-color: blue;
 }
-.number.fav{
+
+.number.favorite{
     border-color:green;
 }
+
 .favorite{
     font-weight: bold;
     cursor: pointer;
