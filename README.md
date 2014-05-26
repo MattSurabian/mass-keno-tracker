@@ -42,62 +42,8 @@ The app is configured to read from my S3 bucket by default, so using the app doe
 
 ### How It Works
 
-I have a m1.small server booted in EC2 configured to run the `realtimeKenoService` via cron every minute.
+~~I have a m1.small server booted in EC2 configured to run the `realtimeKenoService` via cron every minute.~~
 
-**Crontab:**
+The server side code [has been pulled into its own repository](https://github.com/MattSurabian/mass-keno-tracker-server) and is currently deployed on Heroku. The scheduling is accomplished with Heroku Scheduler instead of CRON. As a result the data coming from S3 is less than realtime, but Heroku doesn't support CRON and I'm too cheap to keep an EC2 server running for this.
 
-```
-* * * * * /usr/bin/php5 /mnt/www/keno/realtimeKenoService.php
-``` 
-
-This queries The Massachusett's Lottery servers for a [JSON object containing the day's Keno draw data](http://www.masslottery.com/data/json/search/dailygames/todays/keno.json). This object gets wrapped in a callback function and written to S3 where the front end can read it, preventing both my little m1.small and the state's servers from being bombarded by realtime requests from anyone that's experimenting or using this app.
-
-It's a bit ham-handed in that it queries and writes every minute, regardless of whether it needs to or not, but that's fine for now.
-
-
-### Dependencies
-
-The server directory contains everything necessary to get the backend setup. The _assumed_ dependencies are pretty minimal:
-
- - php5
- - php5-cli
- - php5-curl
- - Composer
- 
- ```
- sudo apt-get install php5
- sudo apt-get install php5-cli
- sudo apt-get install php5-curl
- curl -sS https://getcomposer.org/installer | php
- ```
- 
- The project's dependencies can be satisfied via composer:
- 
- ```
- php composer.phar install
- ```
- 
- This will install the AWS PHP SDK and Guzzle as per the `composer.json` file.
- 
-  
-### IAM Policy
-
-The server authenticates to AWS using the `KenoBucketService` class and inherits the following IAM policy that I've setup:
-
-```
-{
-  "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [ "s3:PutObject", "s3:PutObjectAcl"],
-            "Resource": [ "arn:aws:s3:::keno-tracker-ma/*"]
-        }
-  ]
-}
-```
-### ToDo
-
-Server side chores to accomplish at some point: 
-
- - Support archival data instead of just the current day 
 
